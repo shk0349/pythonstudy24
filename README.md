@@ -5,4 +5,4 @@ MBC 아카데미 컴퓨터 교육센터 수원점에서 AI기초 학습으로 Py
 
 https://wikidocs.net/book/1
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/6b66db54-d265-443b-ace6-0ff8f19e4cd0/1bb789ea-1da3-49ab-bb62-953ab04d4fde/image.png)
+![image](https://github.com/user-attachments/assets/588a09e3-34d4-4332-8b7c-46e26cad4435)
