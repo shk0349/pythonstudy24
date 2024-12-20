@@ -5,9 +5,8 @@ MBC 아카데미 컴퓨터 교육센터 수원점에서 AI기초 학습으로 Py
 
 https://wikidocs.net/book/1
 
+
 """
-
-
 americano = 30
 latte = 15
 greentea = 25
@@ -97,6 +96,4 @@ def main():
             print("잘못된 입력입니다.")
 
 main()
-
-
 """
