@@ -7,6 +7,8 @@ https://wikidocs.net/book/1
 
 
 """
+
+
         americano = 30
         latte = 15
         greentea = 25
@@ -96,4 +98,6 @@ https://wikidocs.net/book/1
                     print("잘못된 입력입니다.")
         
         main()
+
+
 """
