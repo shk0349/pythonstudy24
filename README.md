@@ -9,95 +9,95 @@ https://wikidocs.net/book/1
 """
 
 
-        americano = 30
-        latte = 15
-        greentea = 25
-        americano_price = 2000
-        latte_price = 2500
-        greentea_price = 3000
-        
-        def print_auth():
+menu = []    # 메뉴
+price = []    # 가격
+su = []    # 수량(default)
+sell = []    # 판매수량(판매 시 1씩 증가)
+auth = input("""
+1. 관리자
+2. 고객
+3. 종료
+""")
+while True:
+    if auth == '1':
+        admin_menu = input("""
+        1. 메뉴 추가
+        2. 매출액 보기
+        3. 처음으로
+        """)
+        if admin_menu == '1':
+            for i in range(5):
+                menu.append(input("메뉴명 : "))
+                price.append(int(input("가격 : ")))
+                su.append(int(input("수량 : ")))
+                sell.append(0)
+        elif admin_menu == '2':
+            print("매출 결과")
+            total_sell_price = 0
+            for i in range(len(menu)):
+                sell_price = price[i] * sell[i]
+                total_sell_price += sell_price
+                print("%s : %d잔" % (menu[i], sell[i]))
+            print("매출액 : %d원" % total_sell_price)
+        elif admin_menu == '3':
             auth = input("""
-            1. 손님
-            2. 관리자
-            3. 프로그램 종료
+            1. 관리자
+            2. 고객
+            3. 종료
             """)
-            return auth
-        
-        def print_guest_order():
-            guest_order = input("""
-            1. 메뉴보기
-            2. 주문하기
-            """)
-            return guest_order
-        
-        def print_menu():
-            print("1. 아메리카노 : %d원" % americano_price)
-            print("2. 라떼 : %d원" % latte_price)
-            print("3. 녹차 : %d원" % greentea_price)
-        
-        def print_order(menu):
-            global americano, latte, greentea
-            if menu == '1':
-                if americano > 0:
-                    americano -= 1
-                    print(f"주문하신 아메리카노 1잔 나왔습니다. 남은 수량: {americano}잔")
+        else:
+            print("잘못된 입력입니다.")
+            continue
+    elif auth == '2':
+        guest_menu = input("""
+        1. 메뉴 보기
+        2. 메뉴 주문
+        3. 처음으로
+        """)
+        if guest_menu == '1':
+            for i in range(len(menu)):
+                print("%s : %d원" % (menu[i], price[i]))
+                continue
+        elif guest_menu == '2':
+            for i in range(len(menu)):
+                print("%d. %s" % ((i+1), menu[i]))
+            select_menu = input("메뉴 선택")
+            if int(select_menu) <= len(menu):
+                if sell[int(select_menu) - 1] >= su[int(select_menu) - 1]:
+                    print("재고가 부족합니다.")
+                    continue
                 else:
-                    print("아메리카노가 모두 소진되었습니다.")
-            elif menu == '2':
-                if latte > 0:
-                    latte -= 1
-                    print(f"주문하신 라떼 1잔 나왔습니다. 남은 수량: {latte}잔")
-                else:
-                    print("라떼가 모두 소진되었습니다.")
-            elif menu == '3':
-                if greentea > 0:
-                    greentea -= 1
-                    print(f"주문하신 녹차 1잔 나왔습니다. 남은 수량: {greentea}잔")
-                else:
-                    print("녹차가 모두 소진되었습니다.")
-            else:
-                print("잘못된 메뉴입니다.")
-        
-        def print_admin():
-            global americano, latte, greentea
-            print(f"""
-            판매량
-            1. 아메리카노 : {30 - americano}잔
-            2. 라떼 : {15 - latte}잔
-            3. 녹차 : {25 - greentea}잔
-            """)
-            total = (americano_price * (30 - americano)) + (latte_price * (15 - latte)) + (greentea_price * (25 - greentea))
-            print(f"총 매출액 : {total}원")
-        
-        def main():
-            print("매장 방문을 환영합니다.")
-            auth = print_auth()
-            while True:
-                
-                if auth == '1':
-                    guest_order = print_guest_order()
-                    if guest_order == '1':
-                        print_menu()
-                    elif guest_order == '2':
-                        while True:
-                            print_menu()
-                            menu = input("주문할 메뉴를 선택해주세요 (1~3): ")
-                            print_order(menu)
-                            extra = input("추가 주문하시겠습니까? (Y/N): ").lower()
-                            if extra == 'n':
-                                break
+                    pay = input("금액을 지불해주세요. %s 가격은 %d원 입니다." % (menu[int(select_menu) - 1], price[int(select_menu) - 1]))
+                    if int(pay) > int(price[int(select_menu) - 1]):
+                        sell[int(select_menu) - 1] = sell[int(select_menu) - 1] + 1
+                        print("거스름돈은 %d원 입니다." % (int(pay) - price[int(select_menu) - 1]))
+                    elif int(pay) == price[int(select_menu) - 1]:
+                        sell[int(select_menu) - 1] = sell[int(select_menu) - 1] + 1
+                        print("거스름돈은 없습니다.")
                     else:
-                        print("잘못된 입력입니다.")
-                elif auth == '2':
-                    print_admin()
-                elif auth == '3':
-                    print("프로그램을 종료합니다.")
-                    break
-                else:
-                    print("잘못된 입력입니다.")
-        
-        main()
+                        print("금액이 부족합니다.")
+                        continue
+            else:
+                print("잘못된 입력입니다.")
+                continue
+        elif guest_menu == '3':
+            auth = input("""
+            1. 관리자
+            2. 고객
+            3. 종료
+            """)
+        else:
+            print("잘못된 입력입니다.")
+            continue
+    elif auth == '3':
+        break
+    else:
+        print("잘못된 입력입니다.")
+        auth = input("""
+        1. 관리자
+        2. 고객
+        3. 종료
+        """)
 
 
 """
