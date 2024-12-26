@@ -1,0 +1,11 @@
+1/세단/Benz E450/95000000/15
+2/세단/BMW M340i/70000000/30
+3/세단/Audi A7 55TDI/90000000/10
+4/SUV/BMW X6M/1600000000/20
+5/SUV/MayBach GLS650/260000000/15
+6/SUV/Porsche Cayenne Turbo GT/2400000000/25
+7/쿠페/Porsche Cayman GT4/165000000/10
+8/쿠페/Ferrari 488 Pista/550000000/15
+9/쿠페/Lamborghini Huracan Performante/350000000/20
+10/부가서비스/로또/1000/1500
+11/부가서비스/교통카드/1000/1450
