@@ -78,3 +78,8 @@ plt.title('Length 50cm Perch weight predict - Polynomial')
 plt.xlabel('Length(cm)')
 plt.ylabel('Weight(g)')
 plt.show()
+# 결과 : 훈련값(lr.score(train_poly, train_target) < 테스트값(lr.score(test_poly, test_target) 이므로 과소적합상태
+
+# 총론
+# 선형회귀와 다항회귀를 통해 문제를 해결하고자 하였으나, 아직 모델에 과소적합 문제가 남아있음
+# 이를 해결하기 위해 조금 더 복잡한 모델을 구성해야하나, 이로인해 너무 복잡해진 경우 모델의 복잡도를 억제하는 방안도 구상해야할 것으로 판단됨.
