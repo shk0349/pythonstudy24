@@ -111,3 +111,4 @@ print("=" * 50)
 print("2차원 배열 검증")
 model.evaluate(val_scaled, val_target)
 print("=" * 50)
+
