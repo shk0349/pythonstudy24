@@ -112,3 +112,70 @@ print("2차원 배열 검증")
 model.evaluate(val_scaled, val_target)
 print("=" * 50)
 
+# Optimizer(옵티마이저 / 최적화)
+# 하이퍼파라미터 : 모델이 학습하지 않아 사람이 지정해주어야 하는 파라미터
+    # 신경망에는 특히 하이퍼파라미터가 많이 사용됨
+# 여러 개의 은닉층 추가 가능하고 은닉층의 뉴런 개수나 활성화 함수, 층의 종류 또한 하이퍼파라미터임
+# 케라스는 기본적을 미니배치 경사 하강법(미니배치 개수 default : 32)을 사용하며,
+    # back_size로 미니배치개수로 조절하며, 이 역시 하이퍼파라미터임
+# compile() 메서드에서 케라스의 기본 경사 하강 알고리즘인 RMSprop(Root Mean Square Propagation) 기법을 사용함
+# 케라스는 다양한 종류의 경사 하강법을 제공하며, 이를 옵티마이저라고 함
+
+# 옵티마이저 Test-1 / 확률적 경사 하강법(SGD) / 1개의 샘플을 뽑아 훈련하지 않고, 기본적인 미니배치 사용
+sgd = keras.optimizers.SGD()
+print("SGD 적용 compile 결과")
+model.compile(optimizer = sgd, loss = 'sparse_categorical_crossentropy', metrics = ['accuracy'])
+print("=" * 50)
+
+# learning_rate = 0.1 : 원하는 학습률 기록(default : 0.01
+sgd = keras.optimizers.SGD(learning_rate = 0.1)
+
+# 모멘텀 및 네스트로프
+sgd = keras.optimizers.SGD(momentum = 0.9, nesterov = True)
+# 모멘텀 default 값은 0이며, 그레이던트 가속도 0.9 이상 사용
+# 네스트로프 모멘텀(가속경사)은 모멘텀 최적화를 2번 반복하여 구현 -> 기본 확률적 경사 하강법보다 성능이 높음
+
+# 모델이 최적점에 근접할 수록 학습률을 낮출 수 있음 -> 안정적으로 최적점에 수렴
+    # -> 적응적 학습률 : Adaptive Learning Rate -> 학습을 매개변수로 튜닝하는 수고 절감
+    # -> 적응적 학습률을ㄹ 사용하는 대표적인 최적화기법은 Adagrad, RMSprop가 있음
+
+# Adagrad 적용
+adagrad = keras.optimizers.Adagrad()
+print("Adagrad 적용 결과")
+model.compile(optimizer = adagrad, loss = 'sparse_categorical_crossentropy', metrics = ['accuracy'])
+print("=" * 50)
+
+# RMSprop 적용
+rmsprop = keras.optimizers.RMSprop()
+print("RMSprop 적용 결과")
+model.compile(optimizer = rmsprop, loss = 'sparse_categorical_crossentropy', metrics = ['accuracy'])
+print("=" * 50)
+
+model = keras.Sequential()
+model.add(keras.layers.Flatten(input_shape = (28, 28)))
+model.add(keras.layers.Dense(100, activation = 'relu'))
+model.add(keras.layers.Dense(10, activation = 'softmax'))
+print("정보 요약")
+model.summary()
+print("=" * 50)
+
+# 적응적 학습률 최적화 / Adagrad
+model.compile(optimizer = 'adagrad', loss = 'sparse_categorical_crossentropy', metrics = ['accuracy'])
+model.fit(train_scaled, train_target, epochs = 5)
+print("Adagrad 적용 최적화")
+model.evaluate(val_scaled, val_target)
+print("=" * 50)
+
+# 적응적 학습률 최적화 / RMSprop
+model.compile(optimizer = 'rmsprop', loss = 'sparse_categorical_crossentropy', metrics = ['accuracy'])
+model.fit(train_scaled, train_target, epochs = 5)
+print("RMSprop 적용 최적화")
+model.evaluate(val_scaled, val_target)
+print("=" * 50)
+
+# adam : 모멘텀 최적화와 RMSprop의 장점을 접목한 기법 / 널리 사용중
+model.compile(optimizer = 'adam', loss = 'sparse_categorical_crossentropy', metrics = ['accuracy'])
+model.fit(train_scaled, train_target, epochs = 5)
+print("adam 적용 최적화")
+model.evaluate(val_scaled, val_target)
+print("=" * 50)
