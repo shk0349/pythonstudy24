@@ -46,7 +46,7 @@ model.summary()
 # RMSprop 적용
 rmsprop = keras.optimizers.RMSprop(learning_rate = 1e-4)
 model.compile(optimizer = rmsprop, loss = 'binary_crossentropy', metrics = ['accuracy'])
-checkpoint_cb = keras.callbacks.ModelCheckpoint('best-simplernn-model.keras', save_best_only = True)
+checkpoint_cb = keras.callbacks.ModelCheckpoint('best-simplernn-rmsprop-model.keras', save_best_only = True)
 early_stopping_cb = keras.callbacks.EarlyStopping(patience = 5, restore_best_weights = True)
 history = model.fit(train_oh, train_target, epochs = 100, batch_size = 64, validation_data = (val_oh, val_target), callbacks = [checkpoint_cb, early_stopping_cb])
 
@@ -65,7 +65,7 @@ model2.summary()
 print("=" * 50)
 
 model2.compile(optimizer = rmsprop, loss='binary_crossentropy', metrics=['accuracy'])
-checkpoint_cb = keras.callbacks.ModelCheckpoint('best-embedding-model.keras', save_best_only=True)
+checkpoint_cb = keras.callbacks.ModelCheckpoint('best-embedding-rmsprop-model.keras', save_best_only=True)
 early_stopping_cb = keras.callbacks.EarlyStopping(patience=5, restore_best_weights=True)
 history2 = model2.fit(train_seq, train_target, epochs=100, batch_size=64, validation_data=(val_seq, val_target),callbacks=[checkpoint_cb, early_stopping_cb])
 
