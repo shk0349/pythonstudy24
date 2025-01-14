@@ -43,7 +43,7 @@ train_oh = keras.utils.to_categorical(train_seq)
 val_oh = keras.utils.to_categorical(val_seq)
 model.summary()
 
-# RMSprop 적용
+# RMSprop + SimpleRNN 적용
 rmsprop = keras.optimizers.RMSprop(learning_rate = 1e-4)
 model.compile(optimizer = rmsprop, loss = 'binary_crossentropy', metrics = ['accuracy'])
 checkpoint_cb = keras.callbacks.ModelCheckpoint('best-simplernn-rmsprop-model.keras', save_best_only = True)
@@ -57,6 +57,7 @@ plt.ylabel('loss')
 plt.legend(['train_loss', 'val_loss'])
 plt.show()
 
+# RMSprop + Embedding 적용
 model2 = keras.Sequential()
 model2.add(keras.layers.Embedding(300, 16, input_shape = (100, )))
 model2.add(keras.layers.SimpleRNN(8))
@@ -76,7 +77,7 @@ plt.ylabel('loss')
 plt.legend(['train_loss', 'val_loss'])
 plt.show()
 
-# Adam 적용
+# Adam + SimpleRNN 적용
 model3 = keras.Sequential()
 model3.add(keras.layers.SimpleRNN(8, input_shape = (100, 300), activation = 'tanh'))
 model3.add(keras.layers.Dense(1, activation = 'sigmoid'))
@@ -92,6 +93,7 @@ plt.ylabel('loss')
 plt.legend(['train_loss', 'val_loss'])
 plt.show()
 
+# Adam + Embedding 적용
 model4 = keras.Sequential()
 model4.add(keras.layers.Embedding(300, 16, input_shape = (100, )))
 model4.add(keras.layers.SimpleRNN(8))
@@ -111,7 +113,7 @@ plt.ylabel('loss')
 plt.legend(['train_loss', 'val_loss'])
 plt.show()
 
-# Adagrad 적용
+# Adagrad + SimpleRNN 적용
 model5 = keras.Sequential()
 model5.add(keras.layers.SimpleRNN(8, input_shape = (100, 300), activation = 'tanh'))
 model5.add(keras.layers.Dense(1, activation = 'sigmoid'))
@@ -127,6 +129,7 @@ plt.ylabel('loss')
 plt.legend(['train_loss', 'val_loss'])
 plt.show()
 
+# Adagrad + Embedding 적용
 model6 = keras.Sequential()
 model6.add(keras.layers.Embedding(300, 16, input_shape = (100, )))
 model6.add(keras.layers.SimpleRNN(8))
