@@ -118,7 +118,7 @@ params = {'min_impurity_decrease' : np.arange(0.0001, 0.001, 0.0001),
           'min_samples_split' : range(2, 100, 10)}
 # 총 교차 검증 횟수 : 1350(9 * 15 * 10) * 5(5-폴드교차) = 6750회
 
-# criterion : 분할 품질을 측정한느 기능 (default : gini)
+# criterion : 분할 품질을 측정하는 기능 (default : gini)
 # splitter : 각 노드에서 분할을 선택하는데 사용되는 전략 (default : best)
 # max_depth : 트리의 최대 깊이(값이 클수록 모델의 복잡도 상승)
 # min_samples_split : 자식 노드를 분할하는데 필요한 최소 샘플의 수 (default : 2)
